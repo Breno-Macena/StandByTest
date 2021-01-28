@@ -30,7 +30,7 @@ namespace StandByTest.Controllers {
             {
                 clientes = await repository.FindAsync(f =>
                     (f.Cnpj == model.Cnpj || string.IsNullOrWhiteSpace(model.Cnpj)) &&
-                    (string.IsNullOrWhiteSpace(model.RazaoSocial)) || f.RazaoSocial.ToLower().Contains(model.RazaoSocial.ToLower()) &&
+                    (string.IsNullOrWhiteSpace(model.RazaoSocial) || f.RazaoSocial.ToLower().Contains(model.RazaoSocial.ToLower())) &&
                     (f.Status == model.Status || model.Status == null)
                 );
             }
