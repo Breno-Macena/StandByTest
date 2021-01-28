@@ -30,7 +30,7 @@ namespace StandByTest.Controllers {
             {
                 clientes = await repository.FindAsync(f =>
                     (f.Cnpj == model.Cnpj || string.IsNullOrWhiteSpace(model.Cnpj)) &&
-                    (f.RazaoSocial == model.RazaoSocial || string.IsNullOrWhiteSpace(model.RazaoSocial)) &&
+                    (string.IsNullOrWhiteSpace(model.RazaoSocial)) || f.RazaoSocial.ToLower().Contains(model.RazaoSocial.ToLower()) &&
                     (f.Status == model.Status || model.Status == null)
                 );
             }
@@ -112,5 +112,6 @@ namespace StandByTest.Controllers {
                 return string.IsNullOrWhiteSpace(RazaoSocial) && string.IsNullOrWhiteSpace(Cnpj) && Status == null;
             }
         }
+
     }
 }
