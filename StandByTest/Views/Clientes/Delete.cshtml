@@ -1,0 +1,52 @@
+﻿@model StandByTest.Models.Cliente
+
+@{ 
+    var deleteModal = $"deleteModal{Model.Id}";
+}
+
+<div class="modal fade" id="@deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-danger">Tem certeza que quer excluir este cliente?</h5>
+                <div class="text-left">
+                    <hr />
+                    <p>
+                        <b>@Html.DisplayNameFor(model => model.RazaoSocial):</b> @Html.DisplayFor(model => model.RazaoSocial)
+                    </p>
+                    <p>
+                        <b>@Html.DisplayNameFor(model => model.Cnpj):</b> @Html.DisplayFor(model => model.Cnpj)
+                    </p>
+                    <p>
+                        <b>@Html.DisplayNameFor(model => model.Quarentena):</b>
+                        @if (Model.Quarentena)
+                        {
+                            <span>Sim</span>
+                        }
+                        else
+                        {
+                            <span>Não</span>
+                        }
+                    </p>
+                    <p>
+                        <b>@Html.DisplayNameFor(model => model.Classificacao):</b>
+                        @Html.DisplayFor(model => model.Classificacao)
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Excluir" class="btn btn-danger" />
+                    <button class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

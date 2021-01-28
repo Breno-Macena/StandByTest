@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StandByTest.Models.Cliente>
+
+@if (Model.Count() == 0)
+{
+    <h4 class="text-center text-danger">Nenhum cliente encontrado.</h4>
+}
+else
+{
+    <h5>Clientes</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RazaoSocial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cnpj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataFundacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Capital)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="text-right">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var deleteModal = $"deleteModal{item.Id}";
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataFundacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Capital)
+                    </td>
+                    <td>
+                        @if (item.Status)
+                        {
+                            <span>Ativo</span>
+                        }
+                        else
+                        {
+                            <span>Inativo</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        <a asp-action="Create" asp-route-id="@item.Id"><i class="fa fa-pen-alt text-primary"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#@deleteModal" data-id="@item.Id"><i class="fas fa-trash text-danger"></i></a>
+                        <partial name="Delete" model="@item" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
