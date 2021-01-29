@@ -72,14 +72,14 @@ namespace StandByTest.Controllers {
             return DateTime.Now.AddYears(-1).Date <= cliente.DataFundacao.Date;
         }
 
-        private char SetClassificacao(Cliente cliente)
+        private Classificacao SetClassificacao(Cliente cliente)
         {
             if (cliente.Capital <= 10_000)
-                return 'C';
+                return Classificacao.C;
             else if (cliente.Capital > 10_000 && cliente.Capital <= 1_000_000)
-                return 'B';
+                return Classificacao.B;
             else
-                return 'A';
+                return Classificacao.A;
         }
 
         public async Task<IActionResult> Delete(int id) {

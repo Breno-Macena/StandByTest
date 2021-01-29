@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StandByTest.Models;
+using System;
 
 namespace StandByTest.Database.Configuration {
     public class ClienteConfiguration : IEntityTypeConfiguration<Cliente> {
@@ -42,7 +43,8 @@ namespace StandByTest.Database.Configuration {
 
             builder.Property(c => c.Classificacao)
                 .HasColumnName("classificacao")
-                .HasColumnType("char(1)");
+                .HasColumnType("char(1)")
+                .HasConversion(c => c.ToString(), v => (Classificacao)Enum.Parse(typeof(Classificacao), v));
         }
     }
 }

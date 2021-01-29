@@ -16,7 +16,7 @@ namespace StandByTest.Models {
         public bool Quarentena { get; set; }
         public bool Status { get; set; }
         [Display(Name = "Classificação")]
-        public char Classificacao { get; set; }
+        public Classificacao Classificacao { get; set; }
 
         public bool IsNewCliente()
         {
